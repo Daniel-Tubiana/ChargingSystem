@@ -1,0 +1,140 @@
+# config/train_config.yaml
+# Main configuration file for EV charging system training
+
+# Environment configuration
+env:
+  type: "continuous"  # Options: "continuous", "discrete"
+  n_environments: 16
+  seed: 42
+
+# Run configuration
+run:
+  name: "SOC_reward_during_episode"
+  timestamp: true  # Add timestamp to run name
+
+# Data paths (using POSIX format)
+data:
+  path: "data/simulated"
+  files:
+    df_evs_train: "usr_ev_data_train.xlsx"
+    df_evs_test: "usr_ev_data_test.xlsx"
+    df_build: "Building_data.xlsx"
+
+  # Remove unnamed columns
+  drop_columns: ["Unnamed: 0"]
+
+# Environment registration
+environment:
+  id: "EVChargingEnv-v0"
+  continuous:
+    entry_point: "src.environments.ev_charging_env:make_continuous_env"
+  discrete:
+    entry_point: "src.environments.ev_charging_env:make_discrete_env"
+
+# Model configuration
+model:
+  algorithm: "A2C"  # Options: "A2C", "PPO"
+  policy: "MultiInputPolicy"
+  verbose: 2
+
+  # Algorithm-specific parameters
+  a2c:
+    learning_rate: 0.0007
+    n_steps: 512
+    gamma: 0.99
+    gae_lambda: 1.0
+    ent_coef: 0.0
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+
+  ppo:
+    learning_rate: 0.0003
+    n_steps: 512
+    batch_size: 64
+    n_epochs: 10
+    gamma: 0.99
+    gae_lambda: 0.95
+    clip_range: 0.2
+    ent_coef: 0.0
+    vf_coef: 0.5
+    max_grad_norm: 0.5
+
+# Training configuration
+training:
+  total_timesteps: 24000
+  timesteps_per_save: 2000
+  reset_num_timesteps: false
+
+  # Vectorized environment settings
+  normalize:
+    norm_obs: true
+    norm_reward: true
+    norm_obs_keys: ["evs", "power_allowed"]
+
+# Evaluation configuration
+evaluation:
+  enabled: true
+  n_eval_episodes: 10
+  eval_freq: 5000
+  deterministic: true
+
+# MLflow configuration
+mlflow:
+  enabled: true
+  tracking_uri: "file:./mlruns"  # Local file storage
+  # tracking_uri: "http://localhost:5000"  # Remote MLflow server
+  # tracking_uri: "postgresql://user:password@localhost/mlflow"  # Database
+  experiment_name: "ev_charging_optimization"
+  run_name: null  # Will use run.name if null
+  log_models: true
+  log_artifacts: true
+  log_params: true
+  log_metrics: true
+  log_freq: 1000  # Log training metrics every N steps
+
+  # Model registry (optional)
+  model_registry:
+    enabled: false
+    model_name: "ev_charging_model"
+    stage: "Staging"  # None, Staging, Production, Archived
+
+# Logging configuration
+logging:
+  tensorboard: false   # Disabled in favor of MLflow
+  mlflow: true        # Enable MLflow logging
+  log_dir: "logs"
+  models_dir: "models"
+  results_dir: "results"
+
+# Output configuration
+output:
+  save_model: true
+  save_results: true
+  export_excel: true
+  excel_sheets:
+    - "charge_pwr"
+    - "SOC_mat"
+    - "df_evs_out"
+    - "total_reward"
+
+# Analysis configuration
+analysis:
+  enabled: true
+  generate_plots: true
+  save_figures: true
+
+# Hardware configuration
+hardware:
+  device: "cuda"  # Options: "auto", "cpu", "cuda"
+  n_jobs: -1  # Number of parallel jobs
+
+# Paths (POSIX format)
+paths:
+  root: "."
+  config: "config"
+  src: "src"
+  data: "data"
+  models: "models"
+  logs: "logs"
+  results: "results"
+  legacy: "legacy"

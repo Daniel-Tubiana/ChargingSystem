@@ -1,0 +1,64 @@
+# config/simulation_params.yaml
+
+simulation:
+  N_ev : 2000 # Number of electric vehicles
+  n_households : 126 # Number of households
+  # parameters for EDD Estiamted driving energy Distance
+  edd_mu : 51
+  edd_sigma : 11
+    # parameters Drive distance efficiency and charge rate
+  drive_distance_efficiency : 190
+  charge_rate : 11 # kW
+  # Charging parameters uniform distribution
+  low_soc : 0.15
+  high_soc : 0.5
+
+
+  photo_voltaic:
+    pv_id: 1
+    electricity_price: 0.45 # NIS/kWh
+    pv_area: 50 # m^2
+    pv_efficiency: 0.20 # 20%
+    Performance_Ratio: 0.75 # 75%
+
+  grid:
+    max_power_allowed_transformer : 630 # [KVA]
+    power_factor_transformer : 0.56
+
+
+  electricity_price:
+    hours: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ]
+    months: [ Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec ]
+    table:
+      - [ 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 59.4, 59.4, 59.4, 59.4, 59.4, 15.8, 15.8 ]
+      - [ 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 59.4, 59.4, 59.4, 59.4, 59.4, 15.8, 15.8 ]
+      - [ 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 18.2, 18.2, 18.2, 18.2, 18.2, 15.2, 15.2 ]
+      - [ 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 18.2, 18.2, 18.2, 18.2, 18.2, 15.2, 15.2 ]
+      - [ 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 18.2, 18.2, 18.2, 18.2, 18.2, 15.2, 15.2 ]
+      - [ 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 95.4, 95.4, 95.4, 95.4, 95.4, 95.4, 18.6 ]
+      - [ 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 95.4, 95.4, 95.4, 95.4, 95.4, 95.4, 18.6 ]
+      - [ 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 95.4, 95.4, 95.4, 95.4, 95.4, 95.4, 18.6 ]
+      - [ 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 18.6, 95.4, 95.4, 95.4, 95.4, 95.4, 95.4, 18.6 ]
+      - [ 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 18.2, 18.2, 18.2, 18.2, 18.2, 15.2, 15.2 ]
+      - [ 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 15.2, 18.2, 18.2, 18.2, 18.2, 18.2, 15.2, 15.2 ]
+      - [ 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 15.8, 59.4, 59.4, 59.4, 59.4, 59.4, 15.8, 15.8 ]
+
+
+
+data:
+  paths:
+    charge_data:            ../../src/data/raw/fixed_Dataset 1_EV charging reports.csv
+    adopted_evsISR_path:    ../../src/data/raw/EVs_isr_data.xlsx
+    irradiation_data_path:  ../../src/data/raw/beit_dagan_irradiation.json
+    households_data_path:   ../../src/data/raw/household_power_consumption.csv
+
+
+    output_dir: ../../src/data/simulated/
+    usr_ev_data: usr_ev_data.xlsx
+    electricity_price: electricity_price.xlsx
+    pv_price: pv_price.xlsx
+    building_data: Building_data.xlsx
+
+
+
+
