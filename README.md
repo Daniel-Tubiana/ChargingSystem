@@ -123,18 +123,41 @@ The system includes comprehensive analysis tools for evaluating model performanc
 ## Project Structure
 
 ```
-ev-charging-system/
-├── config/                    # Configuration files
-├── src/                      # Source code
-│   ├── main.py              # Main training/evaluation entry point
-│   ├── data/                # Data handling
-│   ├── environments/        # RL environments
-│   ├── models/             # Model definitions
-│   └── evaluation/         # Evaluation tools
-├── legacy/                  # Original implementation
-├── examples/               # Usage examples
-├── requirements.txt        # Dependencies
-└── README.md              # This file
+ChargingSystem/
+├── config/                  # Configuration files
+│   ├── simulation_params.yaml  # Parameters for simulation
+│   └── train_config.yaml       # Training configuration
+├── legacy/                  # Original implementations
+├── src/                     # Source code
+│   ├── data/                # Data handling modules
+│   │   ├── raw/             # Raw data
+│   │   ├── simulated/       # Simulated data
+│   │   ├── __init__.py
+│   │   ├── data_loader.py   # Data loading utilities
+│   │   └── data_simulation.ipynb  # Data simulation notebook
+│   ├── environments/        # Reinforcement Learning environments
+│   │   ├── __init__.py
+│   │   ├── base_env.py                    # Base environment class
+│   │   ├── environment_factory.py         # Factory for environment creation
+│   │   ├── ev_charging_env.py             # EV charging environment
+│   │   ├── ev_charging_env_continuous.py  # Continuous action EV environment
+│   │   └── ev_charging_env_discrete.py    # Discrete action EV environment
+│   ├── evaluation/          # Evaluation scripts
+│   │   ├── __init__.py
+│   │   └── evaluator.py     # Model evaluation utilities
+│   ├── logs/                # Log files storage
+│   ├── mlruns/              # MLFlow runs for experiments
+│   ├── models/              # Model definitions and scripts
+│   │   ├── __init__.py
+│   │   └── rl_models.py     # Reinforcement Learning models
+│   ├── outputs/             # Output results from runs
+│   ├── results/             # Results and metrics
+│   └── utils/               # Utility functions
+│       ├── __init__.py
+│       └── main.py          # Main training loop
+├── .gitattributes           
+├── .gitignore               
+└── README.md                # Project documentation
 ```
 
 ## Quick Start
