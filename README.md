@@ -10,6 +10,10 @@ This project develops and evaluates reinforcement learning algorithms for managi
 - **Time constraints**: Charging vehicles within their available time windows
 - **SOC requirements**: Ensuring vehicles reach required State of Charge (SOC) levels for planned trips
 - **Energy efficiency**: Maximizing renewable energy utilization while minimizing grid dependency
+- 
+
+<img width="997" height="592" alt="image" src="https://github.com/user-attachments/assets/6177ef09-eb32-4b8f-9c41-a9e6f91aefb0" />
+
 
 The system supports multi-agent environments with up to 189 EVs in a building with 126 apartments, using A2C and PPO algorithms for decision-making.
 
